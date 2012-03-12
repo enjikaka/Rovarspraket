@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Rövarspråket</title>
+</head>
+<body>
+  
+  <div id="input" contenteditable="true">Hej, det här är rövarspråket!</div>
+  
+  <button>Gogo</button>
+  
+  <div id="output"></div>
+  
+  <script src="https://raw.github.com/frederfred/R-varspraket/master/rovarspraket.js"></script>
+  <script>
+  function generate() {
+    var input = document.getElementById('input').innerHTML;
+    document.getElementById('output').innerHTML = input.toRovarspraket();
+  }
+  
+  document.getElementsByTagName('button')[0].addEventListener('click', generate, false);
+  </script>
+  
+</body>
+</html>
