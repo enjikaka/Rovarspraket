@@ -3,23 +3,68 @@
 <head>
   <meta charset="utf-8" />
   <title>Rövarspråket</title>
+  <style type="text/css" media="screen">
+    .box {
+      width: 20%;
+      padding: 1%;
+      min-height: 50px;
+      float: left;
+      border: 1px solid #bbb;
+    }
+    button {
+      float: left;
+      margin: 0 1%;
+    }
+    body > div {
+      overflow: hidden;
+    }
+    hr {
+      margin: 40px 0;
+    }
+  </style>
 </head>
 <body>
   
-  <div id="input" contenteditable="true">Hej, det här är rövarspråket!</div>
+  <h1>Rövarspråket converter</h1>
   
-  <button>Gogo</button>
+  <h2>toRovarspraket()</h2>
+  <div>
+    <div id="to-input" class="box" contenteditable="true">Hej, det här är rövarspråket!</div>
+    <button id="go-to">-></button>
+    <div id="to-output" class="box"></div>
+  </div>
+  <hr />
   
-  <div id="output"></div>
+  <h2>fromRovarspraket()</h2>
+  <div>
+    <div id="from-input" class="box" contenteditable="true">Hohejoj, dodetot hohäror äror rorövovarorsospoproråkoketot!</div>
+    <button id="go-from">-></button>
+    <div id="from-output" class="box"></div>
+  </div>
   
   <script src="https://raw.github.com/frederfred/Rovarspraket/master/rovarspraket.js"></script>
   <script>
-  function generate() {
-    var input = document.getElementById('input').innerHTML;
-    document.getElementById('output').innerHTML = input.toRovarspraket();
+  function add_event(el, type, fn) {
+    if (el.attachEvent) {
+      el['e'+type+fn] = fn;
+      el[type+fn] = function(){el['e'+type+fn]( window.event );};
+      el.attachEvent('on'+type, el[type+fn]);
+    } else {
+      el.addEventListener( type, fn, false );
+    }
   }
   
-  document.getElementsByTagName('button')[0].addEventListener('click', generate, false);
+  function to() {
+    var input = document.getElementById('to-input').innerHTML;
+    document.getElementById('to-output').innerHTML = input.toRovarspraket();
+  }
+  
+  function from() {
+    var input = document.getElementById('from-input').innerHTML;
+    document.getElementById('from-output').innerHTML = input.fromRovarspraket();
+  }
+  add_event(document.getElementById('go-to'), 'click', to);
+  add_event(document.getElementById('go-from'), 'click', from);
   </script>
   
 </body>
