@@ -1,71 +1,102 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <title>Rövarspråket</title>
-  <style type="text/css" media="screen">
-    .box {
-      width: 20%;
-      padding: 1%;
-      min-height: 50px;
-      float: left;
-      border: 1px solid #bbb;
-    }
-    button {
-      float: left;
-      margin: 0 1%;
-    }
-    body > div {
-      overflow: hidden;
-    }
-    hr {
-      margin: 40px 0;
-    }
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
+  <style>
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin:0;
+  }
+  h1 {
+    font-weight:300;
+    font-size:2rem;
+    border-bottom:1px solid black;
+    margin:0;
+    padding:1rem;
+    padding-bottom:0.5rem;
+    margin-bottom:0.5rem;
+  }
+  h2 {
+    padding:1rem;
+  }
+  .convert {
+    display:flex;
+    max-width:700px;
+    margin:1rem auto;
+  }
+  .convert textarea {
+    flex:1;
+    border:1px solid #1976D2;
+    background-color:#fafafa;
+    background-image:linear-gradient(to bottom, #fafafa, #efefef);
+    padding:1rem;
+    height:200px;
+    outline:none;
+    resize: none;
+    font-size:1rem;
+  }
+  .convert textarea:focus {
+    background-color:#fff;
+    background-image:linear-gradient(to bottom, #ffffff, #fafafa);
+  }
+  .convert button {
+    background-color:#2196F3;
+    background-image:linear-gradient(to bottom, #42A5F5, #1E88E5);
+    border-top:1px solid #1976D2;
+    border-bottom:1px solid #1976D2;
+    color:white;
+    font-size:2rem;
+    border:0;
+    outline:none;
+    padding:0 1rem;
+    cursor:pointer;
+  }
+  .convert button:active {
+    background-color:#2196F3;
+    background-image:linear-gradient(to top, #42A5F5, #1E88E5);
+    border-top:1px solid #1976D2;
+    border-bottom:1px solid #1976D2;
+    color:white;
+    font-size:2rem;
+    border:0;
+    outline:none;
+    padding:0 1rem;
+  }
   </style>
 </head>
 <body>
-  
-  <h1>Rövarspråket converter</h1>
-  
-  <h2>toRovarspraket()</h2>
-  <div>
-    <div id="to-input" class="box" contenteditable="true">Hej, det här är rövarspråket!</div>
-    <button id="go-to">-></button>
-    <div id="to-output" class="box"></div>
+  <h1>Rövarspråket</h1>
+  <h2>Rovarspraket.to()</h2>
+  <div class="convert to">
+    <textarea class="src" placeholder="Vanligt språk"></textarea>
+    <button>☛</button>
+    <textarea class="dest" placeholder="Rövarspråk hamnar här"></textarea>
   </div>
-  <hr />
-  
-  <h2>fromRovarspraket()</h2>
-  <div>
-    <div id="from-input" class="box" contenteditable="true">Hohejoj, dodetot hohäror äror rorövovarorsospoproråkoketot!</div>
-    <button id="go-from">-></button>
-    <div id="from-output" class="box"></div>
+
+  <h2>Rovarspraket.from()</h2>
+  <div class="convert from">
+    <textarea class="src" placeholder="Rövarspråk"></textarea>
+    <button>☛</button>
+    <textarea class="dest" placeholder="Vanligt språk hamnar här"></textarea>
   </div>
-  
-  <script src="https://raw.github.com/frederfred/Rovarspraket/master/rovarspraket.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <script src="https://rawgit.com/enjikaka/Rovarspraket/master/rovarspraket.min.js"></script>
   <script>
-  function add_event(el, type, fn) {
-    if (el.attachEvent) {
-      el['e'+type+fn] = fn;
-      el[type+fn] = function(){el['e'+type+fn]( window.event );};
-      el.attachEvent('on'+type, el[type+fn]);
-    } else {
-      el.addEventListener( type, fn, false );
+    function btnPress(event) {
+      var rs = Rovarspraket, parent = event.target.parentNode;
+      if (parent.classList.contains('to')) {
+        parent.querySelector('.dest').value = rs.to(parent.querySelector('.src').value);
+      } else {
+        parent.querySelector('.dest').value = rs.from(parent.querySelector('.src').value);
+      }
     }
-  }
-  
-  function to() {
-    var input = document.getElementById('to-input').innerHTML;
-    document.getElementById('to-output').innerHTML = input.toRovarspraket();
-  }
-  
-  function from() {
-    var input = document.getElementById('from-input').innerHTML;
-    document.getElementById('from-output').innerHTML = input.fromRovarspraket();
-  }
-  add_event(document.getElementById('go-to'), 'click', to);
-  add_event(document.getElementById('go-from'), 'click', from);
+
+    var btns = document.querySelectorAll('.convert button');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', btnPress, false);
+    }
   </script>
-  
 </body>
 </html>
