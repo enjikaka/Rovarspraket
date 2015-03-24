@@ -1,69 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <title>Rövarspråket</title>
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
-  <style>
-  body {
-    font-family: 'Open Sans', sans-serif;
-    margin:0;
-  }
-  h1 {
-    font-weight:300;
-    font-size:2rem;
-    border-bottom:1px solid black;
-    margin:0;
-    padding:1rem;
-    padding-bottom:0.5rem;
-    margin-bottom:0.5rem;
-  }
-  h2 {
-    padding:1rem;
-  }
-  .convert {
-    display:flex;
-    max-width:700px;
-    margin:1rem auto;
-  }
-  .convert textarea {
-    flex:1;
-    border:1px solid #1976D2;
-    background-color:#fafafa;
-    padding:1rem;
-    height:200px;
-    outline:none;
-    resize: none;
-    font-size:1rem;
-    transition:background-color 350ms ease;
-  }
-  .convert textarea:focus {
-    background-color:#fff;
-  }
-  .convert button {
-    background-color:#2196F3;
-    background-image:linear-gradient(to bottom, #42A5F5, #1E88E5);
-    border-top:1px solid #1976D2;
-    border-bottom:1px solid #1976D2;
-    color:white;
-    font-size:2rem;
-    border:0;
-    outline:none;
-    padding:0 1rem;
-    cursor:pointer;
-  }
-  .convert button:active {
-    background-color:#2196F3;
-    background-image:linear-gradient(to top, #42A5F5, #1E88E5);
-    border-top:1px solid #1976D2;
-    border-bottom:1px solid #1976D2;
-    color:white;
-    font-size:2rem;
-    border:0;
-    outline:none;
-    padding:0 1rem;
-  }
-  </style>
+  <style>body{font-family:'Open Sans',sans-serif;margin:0}h1{font-weight:300;font-size:2rem;border-bottom:1px solid #000;margin:0 0 .5rem;padding:1rem 1rem .5rem}h2{padding:1rem}.convert{display:flex;max-width:700px;margin:1rem auto}.convert textarea{flex:1;border:1px solid #1976D2;background-color:#fafafa;padding:1rem;height:200px;outline:0;resize:none;font-size:1rem;transition:background-color 350ms ease}.convert textarea:focus{background-color:#fff}.convert button{background-color:#2196F3;background-image:linear-gradient(to bottom,#42A5F5,#1E88E5);color:#fff;font-size:2rem;border:0;outline:0;padding:0 1rem;cursor:pointer}.convert button:active{background-color:#2196F3;background-image:linear-gradient(to top,#42A5F5,#1E88E5);color:#fff;font-size:2rem;border:0;outline:0;padding:0 1rem}</style>
 </head>
 <body>
   <h1>Rövarspråket</h1>
@@ -82,20 +23,6 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
   <script src="https://rawgit.com/enjikaka/Rovarspraket/master/rovarspraket.min.js"></script>
-  <script>
-    function btnPress(event) {
-      var rs = Rovarspraket, parent = event.target.parentNode;
-      if (parent.classList.contains('to')) {
-        parent.querySelector('.dest').value = rs.to(parent.querySelector('.src').value);
-      } else {
-        parent.querySelector('.dest').value = rs.from(parent.querySelector('.src').value);
-      }
-    }
-
-    var btns = document.querySelectorAll('.convert button');
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener('click', btnPress, false);
-    }
-  </script>
+  <script>function btnPress(a){var b=Rovarspraket;a=a.target.parentNode;a.classList.contains("to")?a.querySelector(".dest").value=b.to(a.querySelector(".src").value):a.querySelector(".dest").value=b.from(a.querySelector(".src").value)}for(var btns=document.querySelectorAll(".convert button"),i=0;i<btns.length;i++)btns[i].addEventListener("click",btnPress,!1);</script>
 </body>
 </html>
